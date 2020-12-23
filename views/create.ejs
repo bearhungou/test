@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Create Restaurant</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="navbar-brand">Create Restaurant</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <%if (error) {%>
+      <div class="alert alert-danger" role="alert">
+        <%=error%>
+      </div>
+      <%}%>
+      <form action="/api/restaurant" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name">
+        </div>
+        <div class="form-group">
+          <label for="borough">Borough</label>
+          <input type="text" class="form-control" name="borough">
+        </div>
+        <div class="form-group">
+          <label for="cuisine">Cuisine</label>
+          <input type="text" class="form-control" name="cuisine">
+        </div>
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input type="text" class="form-control" name="street">
+        </div>
+        <div class="form-group">
+          <label for="building">Building</label>
+          <input type="text" class="form-control" name="building">
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zip code</label>
+          <input type="text" class="form-control" name="zipcode">
+        </div>
+        <div class="form-group">
+          <label for="coord_lon">Coord(lon)</label>
+          <input type="text" class="form-control" name="coord_lon">
+        </div>
+        <div class="form-group">
+          <label for="coord_lat">Coord(lon)</label>
+          <input type="text" class="form-control" name="coord_lat">
+        </div>
+        <div class="form-group">
+          <label for="photo">Photo</label>
+          <input type="file" class="form-control" name="photo" accept="image/gif, image/jpeg,image/x-png">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="submit" class="btn" href="/">Go Back</a>
+      </form>
+    </div>
+  </body>
+</html>

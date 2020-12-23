@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Update Restaurant Info</title>
+    <link href="/styles.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="navbar-brand">Update Restaurant Info</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" disabled value="<%=info.name%>">
+      </div>
+      <div class="form-group">
+        <label for="borough">Borough</label>
+        <input type="text" class="form-control" id="borough" disabled value="<%=info.borough%>">
+      </div>
+      <div class="form-group">
+        <label for="cuisine">Cuisine</label>
+        <input type="text" class="form-control" id="cuisine" disabled value="<%=info.cuisine%>">
+      </div>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" id="street" disabled value="<%=info.street%>">
+      </div>
+      <div class="form-group">
+        <label for="building">Building</label>
+        <input type="text" class="form-control" id="building" disabled value="<%=info.building%>">
+      </div>
+      <div class="form-group">
+        <label for="zipcode">Zip code</label>
+        <input type="text" class="form-control" id="zipcode" disabled value="<%=info.zipcode%>">
+      </div>
+      <div class="form-group">
+        <label for="photo">Photo</label><br/>
+        <img src="<%=info.photo.replace('public', '')%>"/>
+      </div>
+      <div class="form-group">
+        <label for="rate">Rate</label><br/>
+        <table>
+          <thead>
+            <tr>
+              <td>user</td>
+              <td>score</td>
+            </tr>
+          </thead>
+          <tbody>
+            <%info.grades.map(item => {%>
+              <tr>
+                <td><%=item.user%></td>
+                <td><%=item.score%></td>
+              </tr>
+            <%})%>
+          </tbody>
+        </table>
+      </div>
+      <%if (info.coord_lon && info.coord_lat && info.coord_lon !== '' && info.coord_lat !== '') {%>
+      <div class="form-group">
+        <label for="rate">Map</label><br/>
+        <div id="mapid" style="height: 180px"></div>
+        <script>
+          var mymap = L.map('mapid').setView([<%=info.coord_lon%>, <%=info.coord_lat%>], 13);
+          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+          maxZoom: 18,
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1
+        }).addTo(mymap);
+        </script>
+      </div>
+      <%}%>
+      <a type="submit" class="btn btn-primary" href="/update/<%=info._id%>">Update</a>
+      <a type="submit" class="btn btn-primary" href="/rate/<%=info._id%>">Rate</a>
+      <a type="submit" class="btn btn-danger" href="javascript: deleteInfo('<%=info._id%>')">Delete</a>
+      <a type="submit" class="btn" href="/">Go Back</a>
+    </div>
+    <script src="/common.js"></script>
+  </body>
+</html>

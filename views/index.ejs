@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Restaurant</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="navbar-brand">Restaurant List</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/create">Create Restaurant</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <td>name</td>
+            <td>borough</td>
+            <td>cuisine</td>
+            <td>action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% list.forEach(function(item){%>
+            <tr>
+              <td><%=item.name%></td>
+              <td><%=item.borough%></td>
+              <td><%=item.cuisine%></td>
+              <td>
+                <a href='/api/restaurant/<%= item.restaurant_id%>'>detail</a>
+              </td>
+            </tr>
+          <%})%>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
