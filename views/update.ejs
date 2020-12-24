@@ -27,8 +27,9 @@
         <%=error%>
       </div>
       <%}%>
-      <form action="/api/restaurant/update" method="post">
+      <form action="/api/update/restaurant" method="post">
         <input type="hidden" class="form-control" name="_id" value="<%=info._id%>">
+        <input type="hidden" class="form-control" name="owner" value="<%=info.owner%>">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control" name="name" value="<%=info.name%>">

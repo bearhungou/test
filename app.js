@@ -219,7 +219,7 @@ app.post('/api/restaurant', async (req, res) => {
 /**
  * update restaurant by id
  */
-app.post('/api/restaurant/update', async (req, res) => {
+app.post('/api/update/restaurant', async (req, res) => {
   upload(req, res, async function(err) {
     if (err) {
       const list = await Restaurant.find();
@@ -250,7 +250,6 @@ app.post('/api/restaurant/update', async (req, res) => {
           await Restaurant.updateOne(restaurant);
           res.redirect(`/api/restaurant/${restaurant._id}`);
         } catch (err) {
-          console.log(err);
           const list = await Restaurant.find();
           res.render('index', {list: list.map(item => {
             return {
@@ -262,8 +261,8 @@ app.post('/api/restaurant/update', async (req, res) => {
           }) || [], error: undefined});
         }
       } else {
-        res.render('info', { info: restaurant, error: "you could not update this restaurant" });
-        return;
+        const result = await Restaurant.findOne({_id: id});
+        res.render('info', { info: result || {}, error: undefined });
       }
     }
   });
